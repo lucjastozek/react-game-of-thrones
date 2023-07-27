@@ -7,6 +7,10 @@ function App(): JSX.Element {
   const [ancestor, setAncestor] = useState("Queen Elizabeth II");
   const [descendant, setDescendant] = useState("Queen Elizabeth II");
   const [answer, setAnswer] = useState("");
+  const [displayedData, setDisplayedData] = useState({
+    ancestor: "Queen Elizabeth II",
+    descendant: "Queen Elizabeth II",
+  });
 
   return (
     <>
@@ -42,6 +46,8 @@ function App(): JSX.Element {
       </select>
       <button
         onClick={() => {
+          setDisplayedData({ ancestor: ancestor, descendant: descendant });
+
           setAnswer(
             `${isDescendant(
               descendant,
@@ -54,8 +60,8 @@ function App(): JSX.Element {
         GO!!!!
       </button>
       <p>
-        {answer === "true" ? "yes" : "no"}, {descendant} is a descendant of{" "}
-        {ancestor}
+        {answer === "true" ? "yes" : "no"}, {displayedData.descendant} is a
+        descendant of {displayedData.ancestor}
       </p>
     </>
   );
