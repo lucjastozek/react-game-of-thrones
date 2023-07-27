@@ -1,7 +1,7 @@
-import { logAllPeopleInTree } from "./utils/treeLogging";
 import { createBritishSuccessionTree } from "./utils/britain";
 import { useState } from "react";
 import { isDescendant } from "./utils/isDescendant";
+import { Selector } from "./Selector";
 
 function App(): JSX.Element {
   const [ancestor, setAncestor] = useState("Queen Elizabeth II");
@@ -14,36 +14,17 @@ function App(): JSX.Element {
 
   return (
     <>
-      <label htmlFor="ancestor">Ancestor</label>
-      <select
-        id="ancestor"
-        value={ancestor}
-        onChange={(e) => {
-          setAncestor(e.target.value);
-        }}
-      >
-        {logAllPeopleInTree(createBritishSuccessionTree()).map(
-          (person: string, index) => (
-            <option value={person} key={index}>
-              {person}
-            </option>
-          )
-        )}
-      </select>
-      <label htmlFor="descendant">Descendant</label>
-      <select
-        id="descendant"
-        value={descendant}
-        onChange={(e) => {
-          setDescendant(e.target.value);
-        }}
-      >
-        {logAllPeopleInTree(createBritishSuccessionTree()).map(
-          (person: string, index) => (
-            <option key={index}>{person}</option>
-          )
-        )}
-      </select>
+      <Selector
+        person={ancestor}
+        setPerson={setAncestor}
+        personType="Ancestor"
+      />
+      <Selector
+        person={descendant}
+        setPerson={setDescendant}
+        personType="Descendant"
+      />
+
       <button
         onClick={() => {
           setDisplayedData({ ancestor: ancestor, descendant: descendant });
